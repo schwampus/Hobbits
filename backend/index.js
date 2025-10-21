@@ -1,9 +1,13 @@
-import express from 'express' 
+import express from 'express' ;
+import path from 'path';
 
-const app = express(),
-  port = process.env.PORT || 3000
+const app = express();
 
-app.get('/', (_request, response) => {
+const port = process.env.PORT || 3000;
+
+app.use(express.static(path.join(path.resolve(), 'dist')));
+
+app.get('/api', (_request, response) => {
   response.send({ hello: 'World' })
 })
 
