@@ -1,27 +1,22 @@
-import { useState } from 'react'
-
 import './App.css'
+import ProtectedRoute from './components/ProtectedRoute';
+
+import { BrowserRouter,  Routes, Route } from 'react-router-dom'
+import Home from './routes/home'
+import LogIn from './routes/login_Route'     
+import SignUp from './routes/signup_Route'
+import Dashboard from './routes/dashboard_Route'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      
-      <h1>HOBBITS! 🧝</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter> 
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<LogIn />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+    </Routes>
+  </BrowserRouter>
   )
 }
-
 export default App
