@@ -15,7 +15,7 @@ client.connect();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const JWT_SECRET = process.env.JWT_SECRET || 'secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'your-temporary-secure-secret-key';
 
 
 
@@ -40,19 +40,23 @@ app.use(express.json())
 app.use(express.static(path.join(path.resolve(), 'dist')));
 
 const authenticateToken = (req, res, next) => {
-     const authHeader = req.headers['authorization'];
-     const token = authHeader && authHeader.split(' ')[1];
-     if (!token) {
-       return res.status(401).json({ success: false, message: 'No token provided' });
-     }
-     try {
-       const decoded = jwt.verify(token, JWT_SECRET);
-       req.user = decoded;
-       next();
-     } catch (error) {
-       return res.status(403).json({ success: false, message: 'Invalid token' });
-     }
-   };
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  console.log('Received token:', token); // Debug: Log token
+  if (!token) {
+    console.log('No token provided');
+    return res.status(401).json({ success: false, message: 'No token provided' });
+  }
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    console.log('Decoded JWT:', decoded); // Debug: Log decoded payload
+    req.user = decoded;
+    next();
+  } catch (error) {
+    console.error('JWT verification error:', error.message); // Debug: Log error details
+    return res.status(403).json({ success: false, message: 'Invalid token' });
+  }
+};
 
 app.get('/api', async (_request, response) => {
   const {rows} = await client.query(
