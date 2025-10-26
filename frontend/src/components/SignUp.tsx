@@ -11,7 +11,7 @@
     const handleSignUpSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/signup', {
+      const response = await axios.post('https://hobbits.onrender.com/signup', {
         username,
         userpass,
       });
