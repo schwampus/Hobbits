@@ -31,37 +31,40 @@
     };
 
   return (
-  <div className=" h-[420px] w-[400px]  flex flex-col items-center bg-(--brand-dark)  rounded-3xl shadow-lg p-8">
-    <button className="self-start ml-8 mb-14 btn-secondary mr-10"><Link to="/" >Go Back</Link>
-</button>
+  <div id="wrapper">
+    <main>
+    
 
   <form onSubmit={handleSubmit}>
-    <div className="mb-2">
-      <label className="font-bold">Username:</label>
+    <div className="mb-2 flex flex-col">
+      <button className=" mb-14 w-30 btn-secondary "><Link to="/" >GO BACK</Link>
+</button>
+      <label className="font-bold text-[var(--alt-leaves)] font-texturina">Username:</label>
       <input
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="border-2 p-1 w-full mt-2 mb-2 rounded-md"
+        className="input-field"
         required />
     </div>
 
     <div className="mb-2">
-      <label className="font-bold">Password:</label>
+      <label className="font-bold text-[var(--alt-leaves)] font-texturina">Password:</label>
       <input
         type="password"
         value={userpass}
         onChange={(e) => setUserpass(e.target.value)}
-        className="border-2 p-1 w-full mt-2 mb-2 rounded-md"
+        className="input-field"
         required />
     </div>
 
-    <button type="submit" className="font-texturina btn-primary mt-4 w-full font-black text-cyan-50
-    ">Log In</button>
+    <button type="submit" className="font-texturina btn-primary mt-4 w-full font-bold
+    ">LOG IN</button>
     </form>
     {message && <p className="mt-4" style={{color: message.includes ('successful') ? 'var(--alt-leaves)' : 'var(--alt-earth'}}> {message} </p> } 
 
     
+  </main>
   </div>
   );
 

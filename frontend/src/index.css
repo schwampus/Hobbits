@@ -2,6 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&display=swap");
 @import "tailwindcss";
 
+:root {
+	color-scheme: light dark;
+	color: var(--brand-light);
+	background-color: --var(--brand-darkest);
+}
+
 @theme {
 	--font-new-rocker: "New Rocker", cursive;
 	--font-texturina: "Texturina", serif;
@@ -15,7 +21,7 @@
 
 	--alt-bone: #ffe8d6;
 	--alt-reed: #d4c7b0;
-	--alt-earth: #b98b73;
+	--alt-earth: #78513c;
 	--alt-tan: #cb997e;
 	--alt-leaves: #a5a58d;
 	--alt-moss: #6b705c;
@@ -24,13 +30,16 @@
 
 @layer components {
 	.btn-primary {
+		font-family: var(--font-texturina);
+		text-shadow: 1px 2px 2px var(--brand-darkest);
+		font-weight: var(--font-weight-semibold);
 		border-radius: 8px;
 		background-color: var(--brand-primary);
 		padding-inline: --spacing(5);
 		padding-block: --spacing(2);
-		font-weight: var(--font-weight-semibold);
-		color: var(--color-white);
-		box-shadow: var(--shadow-md);
+
+		color: var(--alt-bone);
+		box-shadow: 1px 3px 6px var(--brand-darkest);
 		&:hover {
 			@media (hover: hover) {
 				background-color: var(--brand-darkest);
@@ -38,55 +47,58 @@
 		}
 	}
 	.btn-secondary {
+		font-family: var(--font-texturina);
+		font-weight: var(--font-weight-semibold);
+		text-shadow: 1px 2px 2px var(--brand-darkest);
 		border-radius: 8px;
 		background-color: var(--brand-dark);
-		border: 1px solid var(--brand-light);
+		border: 1px solid var(--alt-leaves);
 		padding-inline: --spacing(5);
 		padding-block: --spacing(2);
-		font-weight: var(--font-weight-semibold);
-		color: var(--brand-reed);
-		box-shadow: var(--shadow-md);
+
+		color: var(--alt-leaves);
+		box-shadow: 1px 3px 6px var(--brand-darkest);
 		&:hover {
 			@media (hover: hover) {
 				background-color: var(--brand-darkest);
 			}
 		}
 	}
-
-	.text-outline {
-		stroke: solid 2px var(--alt-bone);
-	}
+}
+#wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh; /* min-h-screen */
+	width: 100vw;
+	background-color: var(--alt-leaves);
 }
 
-:root {
-	color-scheme: light dark;
-	color: var(--brand-light);
-	background-color: --var(--brand-darkest);
+main {
+	height: 440px;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--brand-dark);
+	/* rounded-3xl = 24px */
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -4px rgba(0, 0, 0, 0.1); /* shadow-lg */
+	padding: 2rem; /* p-8 = 32px */
 }
 
-/* a {
-	font-weight: 500;
-	color: #646cff;
-	text-decoration: inherit;
+.input-field {
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--alt-leaves);
+	padding: 0.25rem;
+	width: 100%;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	border-radius: 0.375rem;
 }
-a:hover {
-	color: #535bf2;
-} */
 
-/* button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #2f3e46;
-	cursor: pointer;
-	transition: border-color 0.25s;
-}
-button:hover {
-	border-color: #646cff;
-} */
 button:focus,
 button:focus-visible {
 	outline-color: var(--alt-bone) 4px auto -webkit-focus-ring-color;
