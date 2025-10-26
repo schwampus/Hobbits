@@ -31,39 +31,40 @@
     };
 
     return(
-       <div className=" h-[420px] w-[400px]  flex flex-col items-center bg-(--brand-dark)  rounded-3xl shadow-lg p-8">
-    <button className="self-start ml-8 mb-14 btn-secondary mr-10"><Link to="/" >Go Back</Link>
-</button>
+       <div id="wrapper">
+       <main>
+   
 
 
 
   <form onSubmit={handleSignUpSubmit}>
-    <div className="mb-2">
-      <label className="font-bold">Choose your Username:</label>
+    <div className="mb-2 flex flex-col">
+       <button className=" mb-14 w-30 btn-secondary mr-10"><Link to="/" >GO BACK</Link></button>
+      <label className="font-bold text-[var(--alt-leaves)] font-texturina">Choose your Username:</label>
       <input
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="border-2 p-1 w-full mt-2 mb-2 rounded-md"
+        className="input-field"
         required />
     </div>
 
     <div className="mb-2">
-      <label className="font-bold">Set your Password:</label>
+      <label className="font-bold text-[var(--alt-leaves)] font-texturina">Set your Password:</label>
       <input
         type="password"
         value={userpass}
         onChange={(e) => setUserpass(e.target.value)}
-        className="border-2 p-1 w-full mt-2 mb-2 rounded-md"
+        className="input-field"
         required />
     </div>
 
-    <button type="submit" className="font-texturina btn-primary mt-4 w-full font-bold text-cyan-50
-    ">Create your Hobbit!</button>
+    <button type="submit" className="font-texturina btn-primary mt-4 w-full font-bold 
+    ">CREATE YOUR HOBBIT!</button>
     </form>
     {message && <p className="mt-4" style={{color: message.includes ('successful') ? 'var(--alt-leaves)' : 'var(--alt-earth'}}> {message} </p> } 
 
-    
+    </main>
   </div>
     )
  }
