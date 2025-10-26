@@ -17,7 +17,7 @@
       });
     setMessage(response.data.message);
     if (response.data.success) {
-      localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('token', response.data.token);
       navigate('/dashboard')
     }
     }
