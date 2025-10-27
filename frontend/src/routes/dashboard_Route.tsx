@@ -25,7 +25,7 @@ const Dashboard = () => {
           navigate('/login');
           return;
         }
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/user`, {
+        const response = await axios.get('https://hobbits.onrender.com/user', {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (response.data.success) {
@@ -38,6 +38,7 @@ const Dashboard = () => {
         }
       } catch (error:unknown) {
         setError('Failed to fetch user data');
+        console.error(error);
         navigate('/login');
       }
     };
@@ -66,6 +67,7 @@ const Dashboard = () => {
       }
     } catch (error:unknown) {
       setError('Failed to add hobby');
+      console.error(error);
     }
   };
 

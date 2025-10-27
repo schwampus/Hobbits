@@ -6,19 +6,26 @@
     const [username, setUsername] = useState(''); 
     const [userpass, setUserpass] = useState('');
     const [message, setMessage] = useState('');
+    const [error, setError] = useState('default error');
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await axios.post('https://hobbits.onrender.com/login', {
-        username,
-        userpass,
+        username: username,
+        userpass: userpass,
       });
     setMessage(response.data.message);
-    if (response.data.success) {
+    if (response.data.success && response.data.token) {
     localStorage.setItem('token', response.data.token);
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('username', username);
       navigate('/dashboard')
+    } else {
+      setError(response.data.message || 'Could not log in.');
+      console.error('Login error:', error);
+
     }
     }
     catch (error: unknown) {
@@ -39,7 +46,8 @@
     <div className="mb-2 flex flex-col">
       <button className=" mb-14 w-30 btn-secondary "><Link to="/" >GO BACK</Link>
 </button>
-      <label className="font-bold text-[var(--alt-leaves)] font-texturina">Username:</label>
+      <label className="font-bold text-(--alt-leaves)
+      font-texturina">Username:</label>
       <input
         type="text"
         value={username}
@@ -49,7 +57,7 @@
     </div>
 
     <div className="mb-2">
-      <label className="font-bold text-[var(--alt-leaves)] font-texturina">Password:</label>
+      <label className="font-bold text-(--alt-leaves) font-texturina">Password:</label>
       <input
         type="password"
         value={userpass}
