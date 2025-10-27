@@ -76,7 +76,10 @@ app.post('/login', async (req, res) => {
     console.log('Query result:', rows);
 
         if (rows.length > 0) {
-            res.json({ success: true, message: 'Login successful!' });
+          const token = jwt.sign({ user_id: rows[0].user_id, username: rows[0].username }, JWT_SECRET, {
+        expiresIn: '1h'
+      });
+            res.json({ success: true, message: 'Login successful!', token });
         } 
           else {
             res.status(401).json({ success: false, message: 'Wrong name or password' });
