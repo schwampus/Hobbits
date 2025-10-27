@@ -6,7 +6,7 @@
     const [username, setUsername] = useState(''); 
     const [userpass, setUserpass] = useState('');
     const [message, setMessage] = useState('');
-    const [error, setError] = useState('default error');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

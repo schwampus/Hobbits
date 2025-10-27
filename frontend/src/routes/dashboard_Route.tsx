@@ -118,79 +118,86 @@ const Dashboard = () => {
           <span className="text-(--brand-primary) text-2xl">{username}!</span>
         </p>
 
-        <div className="flex w-full justify-around flex-row">
-          <div className="flex w-2/6">
-            <img src="/hobbit.png" alt="Hobbit" style={{ height: '200px' }} />
-          </div>
+     
+        <div className="flex flex-wrap md:flex-nowrap md:flex-1 flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 items-center justify-center"> 
 
-          <div className="flex flex-col w-4/6">
-            <form onSubmit={handleAddHobby} className="mt-4 w-full max-w-xs">
-              <div className="mb-2">
-                <label className="font-bold">Add Hobby:</label>
+          <div className="order-1 md:order-1  w-40 sm:w-xs  p-4 flex justify-center items-center">
+              <img src="/hobbit.png" alt="Hobbit" className="h-32 sm:h-40 md:h-98 object-contain" /> </div>
+          
+          <div className="order-3 md:order-2 flex-1  p-4">
+           
+            {hobbies.length > 0 ? (
+                <div className="mt-4 w-full ">
+                  <h1 className="font-bold font-texturina text-(--brand-secondary) text-xs sm:text-3xl text-center ">YOUR TRACKED HOBBITS:</h1>
+                  <hr className="border-t-2 border-(--alt-bone) w-full mt-2 mb-6" />
+                  <ul className="space-y-4">
+                    {hobbies.map((hobby) => (
+                      <li key={hobby.hobby_id} className="flex justify-between items-center">
+                        <span className="font-texturina font-bold text-2xl text-(--brand-primary)">
+                          {hobby.hobby}</span><span className="font-texturina font-bold text-md sm:text-sm text-(--alt-bone)">({hobby.times_done} tracked efforts!)
+                        </span>
+                        <button
+                          onClick={() => handleIncrementHobby(hobby.hobby_id)}
+                          className="btn-secondary ml-2 text-sm px-2 py-1"
+                        >
+                          +
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                  <hr className="border-t-2 border-(--alt-bone) w-full mt-6 mb-6" />
+                </div>
+              ) : (
+                <p className="mt-4">No hobbies added yet.</p>
+              )}
+           
+            <form onSubmit={handleAddHobby} className="mt-4 w-full sm:max-w-md mx-auto">
+              <div className="mb-2 mt-4">
+                <label className="font-bold font-texturina text-md">Add another Hobby:</label>
                 <input
                   type="text"
                   value={newHobby}
                   onChange={(e) => setNewHobby(e.target.value)}
-                  className="border-2 p-1 w-full mt-2 mb-2 rounded-md"
-                  placeholder="Enter a hobby"
+                  className="input-field"
+                  placeholder="enter here"
                 />
               </div>
               <button
                 type="submit"
-                className="font-texturina btn-primary w-full font-black text-cyan-50"
+                className="font-texturina btn-primary w-full font-black text-cyan-50 py-2"
               >
-                Add Hobby
+                ADD NEW HOBBY!
               </button>
             </form>
 
-            {hobbies.length > 0 ? (
-              <div className="mt-4 w-full max-w-xs">
-                <h2 className="font-bold">Your Hobbies:</h2>
-                <ul className="list-disc pl-5">
-                  {hobbies.map((hobby) => (
-                    <li key={hobby.hobby_id} className="flex justify-between items-center">
-                      <span>
-                        {hobby.hobby} ({hobby.times_done} times this year)
-                      </span>
-                      <button
-                        onClick={() => handleIncrementHobby(hobby.hobby_id)}
-                        className="btn-secondary ml-2 text-sm px-2 py-1"
-                      >
-                        +
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <p className="mt-4">No hobbies added yet.</p>
-            )}
+             
 
-            {error && (
-              <p className="mt-4" style={{ color: 'var(--alt-earth)' }}>
-                {error}
-              </p>
-            )}
-          </div>
+              {error && (
+                <p className="mt-4" style={{ color: 'var(--alt-earth)' }}>
+                  {error}
+                </p>
+              )}
+            </div>
 
-          <div className="m-4 flex flex-col w-2/6">
-            <h4 className="mt-20 text-center font-new-rocker text-(--alt-reed) [text-shadow:2px_2px_3px_black]">
-              YOUR AMOUNT OF BITS:
-            </h4>
-            <h1 className="text-9xl text-center mt-2 font-new-rocker [text-shadow:2px_2px_3px_black]">
-              {bits}
-            </h1>
-          </div>
+            <div className="order-2 md:order-3  w-40 sm:w-xs p-4 text-center">
+              <h4 className="text-center font-new-rocker text-(--alt-reed)  [text-shadow:2px_2px_3px_black] text-lg sm:text-lg md:text-2xl mt-2 md:mt-10">EARNED BITS:</h4>
+              <h1 className="text-6xl sm:text-7xl md:text-9xl text-center mt-2 font-new-rocker [text-shadow:2px_2px_3px_black]">
+              {bits}</h1>
+            </div>
+              
+       
         </div>
-
-        <button
+         <button
           onClick={handleLogout}
-          className="self-start ml-8 mt-4 btn-secondary"
+          className="self-center  mt-4 btn-secondary"
         >
           Log Out
         </button>
+        </div>
+
+       
       </div>
-    </div>
+    
   );
 };
 
